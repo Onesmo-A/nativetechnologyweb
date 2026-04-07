@@ -4,6 +4,7 @@ export type WorkItem = {
   category: string;
   description: string;
   tags: string[];
+  image: string;
 };
 
 const worksData: WorkItem[] = [
@@ -14,6 +15,7 @@ const worksData: WorkItem[] = [
     description:
       "A modern web dashboard for operations, analytics, and role-based access.",
     tags: ["Next.js", "APIs", "Role-Based Access"],
+    image: "/images/works/work-01.jpg",
   },
   {
     id: 2,
@@ -22,6 +24,7 @@ const worksData: WorkItem[] = [
     description:
       "A mobile-first app for capturing data on the go with offline-ready flows.",
     tags: ["Mobile", "Offline", "Sync"],
+    image: "/images/works/work-02.jpg",
   },
   {
     id: 3,
@@ -30,8 +33,8 @@ const worksData: WorkItem[] = [
     description:
       "Custom workflows that reduce manual work and improve visibility across teams.",
     tags: ["Automation", "Integrations", "Audit Logs"],
+    image: "/images/works/work-03.jpg",
   },
 ];
 
 export default worksData;
-

@@ -1,317 +1,209 @@
 "use client";
-import { useState, useEffect } from "react";
-import Link from "next/link";
 
-const Hero = () => {
-  const [currentImage, setCurrentImage] = useState(0);
-  const images = [
-    "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&q=80", 
-    "https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&q=80",
-    "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80"
-  ];
+import Image from "next/image";
+import Link from "next/link";
+import { useEffect, useMemo, useRef, useState } from "react";
+
+type HeroSlide = {
+  image: string;
+  title: string;
+  description: string;
+};
+
+const SLIDE_INTERVAL_MS = 6000;
+const COPY_EXIT_MS = 800;
+
+const defaultSlides: HeroSlide[] = [
+  {
+    image: "/images/hero/slide-01.jpg",
+    title: "Web & Mobile Solutions Built to Scale",
+    description:
+      "Native Technology designs and builds modern products for web and mobile — fast, secure, and ready for growth.",
+  },
+  {
+    image: "/images/hero/slide-02.jpg",
+    title: "Design, Development, and Long‑Term Support",
+    description:
+      "From discovery to launch, we deliver premium UI/UX and clean implementation — then keep everything running smoothly.",
+  },
+  {
+    image: "/images/hero/slide-03.jpg",
+    title: "Digital Systems That Streamline Your Business",
+    description:
+      "Custom business systems, integrations, and automation that reduce manual work and improve visibility.",
+  },
+];
+
+const Hero = ({ slides: slidesProp }: { slides?: HeroSlide[] }) => {
+  const slides: HeroSlide[] = useMemo(() => {
+    const safe = Array.isArray(slidesProp) ? slidesProp.filter(Boolean) : [];
+    return safe.length > 0 ? safe : defaultSlides;
+  }, [slidesProp]);
+
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const [previousSlide, setPreviousSlide] = useState<number | null>(null);
+  const currentSlideRef = useRef(currentSlide);
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setCurrentImage((prev) => (prev + 1) % images.length);
-    }, 5000);
+      setCurrentSlide((prev) => (prev + 1) % slides.length);
+    }, SLIDE_INTERVAL_MS);
+
     return () => clearInterval(interval);
-  }, [images.length]);
+  }, [slides.length]);
+
+  useEffect(() => {
+    const oldSlide = currentSlideRef.current;
+    if (oldSlide === currentSlide) return;
+
+    setPreviousSlide(oldSlide);
+    currentSlideRef.current = currentSlide;
+
+    const timeout = setTimeout(() => setPreviousSlide(null), COPY_EXIT_MS);
+    return () => clearTimeout(timeout);
+  }, [currentSlide]);
 
   return (
-    <>
-      <section
-        id="home"
-        className="relative z-10 overflow-hidden pb-16 pt-[120px] md:pb-[120px] md:pt-[150px] xl:pb-[160px] xl:pt-[180px] 2xl:pb-[200px] 2xl:pt-[210px]"
-      >
-        {/* Background Slider */}
-        {images.map((img, index) => (
-          <div
-            key={index}
-            className={`absolute inset-0 z-[-2] transition-opacity duration-1000 ease-in-out ${
-              index === currentImage ? "opacity-100" : "opacity-0"
-            }`}
-            style={{
-              backgroundImage: `linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url(${img})`,
-              backgroundSize: "cover",
-              backgroundPosition: "center",
-            }}
-          />
-        ))}
+    <section
+      id="home"
+      className="relative z-10 overflow-hidden pb-16 pt-[120px] md:pb-[120px] md:pt-[150px] xl:pb-[160px] xl:pt-[180px] 2xl:pb-[200px] 2xl:pt-[210px]"
+    >
+      {/* Background Slider */}
+      {slides.map((slide, index) => (
+        <div
+          key={slide.image}
+          className={`absolute inset-0 z-[-2] transition-opacity duration-1000 ease-in-out ${
+            index === currentSlide ? "opacity-100" : "opacity-0"
+          }`}
+          style={{
+            backgroundImage: `linear-gradient(rgba(0,0,0,0.68), rgba(0,0,0,0.68)), url(${slide.image})`,
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+          }}
+        />
+      ))}
 
-        <div className="container relative z-10">
-          <div className="-mx-4 flex flex-wrap">
-            <div className="w-full px-4">
-              <div className="mx-auto max-w-[800px] text-center">
-                <h1 className="mb-5 text-3xl font-bold leading-tight text-white sm:text-4xl sm:leading-tight md:text-5xl md:leading-tight">
-                  Modern Web &amp; Mobile Solutions Built for Growth
-                </h1>
-                <p className="mb-12 text-base leading-relaxed text-white/90 sm:text-lg md:text-xl">
-                  Native Technology designs and develops web apps, mobile apps,
-                  business systems, and digital solutions—then keeps them secure,
-                  scalable, and running smoothly.
-                </p>
-                <div className="flex flex-col items-center justify-center space-y-4 sm:flex-row sm:space-x-4 sm:space-y-0">
-                  <Link
-                    href="/contact"
-                    className="rounded-xs bg-primary px-8 py-4 text-base font-semibold text-white duration-300 ease-in-out hover:bg-primary/90"
-                  >
-                    Contact Us
-                  </Link>
-                  <Link
-                    href="/works"
-                    className="inline-block rounded-xs bg-white px-8 py-4 text-base font-semibold text-black duration-300 ease-in-out hover:bg-white/90"
-                  >
-                    View Our Work
-                  </Link>
+      <div className="container relative z-10">
+        <div className="-mx-4 flex flex-wrap">
+          <div className="w-full px-4">
+            <div className="relative mx-auto max-w-[820px] text-center">
+              {previousSlide !== null && (
+                <div className="pointer-events-none absolute inset-0">
+                  <HeroCopy
+                    key={`hero-out-${previousSlide}-${currentSlide}`}
+                    slide={slides[previousSlide]}
+                    variant="exit"
+                    slides={slides}
+                    currentSlide={currentSlide}
+                    onSelect={setCurrentSlide}
+                  />
                 </div>
-              </div>
+              )}
+
+              <HeroCopy
+                key={`hero-in-${currentSlide}`}
+                slide={slides[currentSlide]}
+                variant="enter"
+                slides={slides}
+                currentSlide={currentSlide}
+                onSelect={setCurrentSlide}
+              />
             </div>
           </div>
         </div>
-        <div className="absolute right-0 top-0 z-[-1] opacity-30 lg:opacity-100">
-          <svg
-            width="450"
-            height="556"
-            viewBox="0 0 450 556"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <circle
-              cx="277"
-              cy="63"
-              r="225"
-              fill="url(#paint0_linear_25:217)"
-            />
-            <circle
-              cx="17.9997"
-              cy="182"
-              r="18"
-              fill="url(#paint1_radial_25:217)"
-            />
-            <circle
-              cx="76.9997"
-              cy="288"
-              r="34"
-              fill="url(#paint2_radial_25:217)"
-            />
-            <circle
-              cx="325.486"
-              cy="302.87"
-              r="180"
-              transform="rotate(-37.6852 325.486 302.87)"
-              fill="url(#paint3_linear_25:217)"
-            />
-            <circle
-              opacity="0.8"
-              cx="184.521"
-              cy="315.521"
-              r="132.862"
-              transform="rotate(114.874 184.521 315.521)"
-              stroke="url(#paint4_linear_25:217)"
-            />
-            <circle
-              opacity="0.8"
-              cx="356"
-              cy="290"
-              r="179.5"
-              transform="rotate(-30 356 290)"
-              stroke="url(#paint5_linear_25:217)"
-            />
-            <circle
-              opacity="0.8"
-              cx="191.659"
-              cy="302.659"
-              r="133.362"
-              transform="rotate(133.319 191.659 302.659)"
-              fill="url(#paint6_linear_25:217)"
-            />
-            <defs>
-              <linearGradient
-                id="paint0_linear_25:217"
-                x1="-54.5003"
-                y1="-178"
-                x2="222"
-                y2="288"
-                gradientUnits="userSpaceOnUse"
-              >
-                <stop stopColor="#02666D" />
-                <stop offset="1" stopColor="#02666D" stopOpacity="0" />
-              </linearGradient>
-              <radialGradient
-                id="paint1_radial_25:217"
-                cx="0"
-                cy="0"
-                r="1"
-                gradientUnits="userSpaceOnUse"
-                gradientTransform="translate(17.9997 182) rotate(90) scale(18)"
-              >
-                <stop offset="0.145833" stopColor="#02666D" stopOpacity="0" />
-                <stop offset="1" stopColor="#02666D" stopOpacity="0.08" />
-              </radialGradient>
-              <radialGradient
-                id="paint2_radial_25:217"
-                cx="0"
-                cy="0"
-                r="1"
-                gradientUnits="userSpaceOnUse"
-                gradientTransform="translate(76.9997 288) rotate(90) scale(34)"
-              >
-                <stop offset="0.145833" stopColor="#02666D" stopOpacity="0" />
-                <stop offset="1" stopColor="#02666D" stopOpacity="0.08" />
-              </radialGradient>
-              <linearGradient
-                id="paint3_linear_25:217"
-                x1="226.775"
-                y1="-66.1548"
-                x2="292.157"
-                y2="351.421"
-                gradientUnits="userSpaceOnUse"
-              >
-                <stop stopColor="#02666D" />
-                <stop offset="1" stopColor="#02666D" stopOpacity="0" />
-              </linearGradient>
-              <linearGradient
-                id="paint4_linear_25:217"
-                x1="184.521"
-                y1="182.159"
-                x2="184.521"
-                y2="448.882"
-                gradientUnits="userSpaceOnUse"
-              >
-                <stop stopColor="#02666D" />
-                <stop offset="1" stopColor="white" stopOpacity="0" />
-              </linearGradient>
-              <linearGradient
-                id="paint5_linear_25:217"
-                x1="356"
-                y1="110"
-                x2="356"
-                y2="470"
-                gradientUnits="userSpaceOnUse"
-              >
-                <stop stopColor="#02666D" />
-                <stop offset="1" stopColor="white" stopOpacity="0" />
-              </linearGradient>
-              <linearGradient
-                id="paint6_linear_25:217"
-                x1="118.524"
-                y1="29.2497"
-                x2="166.965"
-                y2="338.63"
-                gradientUnits="userSpaceOnUse"
-              >
-                <stop stopColor="#02666D" />
-                <stop offset="1" stopColor="#02666D" stopOpacity="0" />
-              </linearGradient>
-            </defs>
-          </svg>
-        </div>
-        <div className="absolute bottom-0 left-0 z-[-1] opacity-30 lg:opacity-100">
-          <svg
-            width="364"
-            height="201"
-            viewBox="0 0 364 201"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M5.88928 72.3303C33.6599 66.4798 101.397 64.9086 150.178 105.427C211.155 156.076 229.59 162.093 264.333 166.607C299.076 171.12 337.718 183.657 362.889 212.24"
-              stroke="url(#paint0_linear_25:218)"
-            />
-            <path
-              d="M-22.1107 72.3303C5.65989 66.4798 73.3965 64.9086 122.178 105.427C183.155 156.076 201.59 162.093 236.333 166.607C271.076 171.12 309.718 183.657 334.889 212.24"
-              stroke="url(#paint1_linear_25:218)"
-            />
-            <path
-              d="M-53.1107 72.3303C-25.3401 66.4798 42.3965 64.9086 91.1783 105.427C152.155 156.076 170.59 162.093 205.333 166.607C240.076 171.12 278.718 183.657 303.889 212.24"
-              stroke="url(#paint2_linear_25:218)"
-            />
-            <path
-              d="M-98.1618 65.0889C-68.1416 60.0601 4.73364 60.4882 56.0734 102.431C120.248 154.86 139.905 161.419 177.137 166.956C214.37 172.493 255.575 186.165 281.856 215.481"
-              stroke="url(#paint3_linear_25:218)"
-            />
-            <circle
-              opacity="0.8"
-              cx="214.505"
-              cy="60.5054"
-              r="49.7205"
-              transform="rotate(-13.421 214.505 60.5054)"
-              stroke="url(#paint4_linear_25:218)"
-            />
-            <circle cx="220" cy="63" r="43" fill="url(#paint5_radial_25:218)" />
-            <defs>
-              <linearGradient
-                id="paint0_linear_25:218"
-                x1="184.389"
-                y1="69.2405"
-                x2="184.389"
-                y2="212.24"
-                gradientUnits="userSpaceOnUse"
-              >
-                <stop stopColor="#02666D" stopOpacity="0" />
-                <stop offset="1" stopColor="#02666D" />
-              </linearGradient>
-              <linearGradient
-                id="paint1_linear_25:218"
-                x1="156.389"
-                y1="69.2405"
-                x2="156.389"
-                y2="212.24"
-                gradientUnits="userSpaceOnUse"
-              >
-                <stop stopColor="#02666D" stopOpacity="0" />
-                <stop offset="1" stopColor="#02666D" />
-              </linearGradient>
-              <linearGradient
-                id="paint2_linear_25:218"
-                x1="125.389"
-                y1="69.2405"
-                x2="125.389"
-                y2="212.24"
-                gradientUnits="userSpaceOnUse"
-              >
-                <stop stopColor="#02666D" stopOpacity="0" />
-                <stop offset="1" stopColor="#02666D" />
-              </linearGradient>
-              <linearGradient
-                id="paint3_linear_25:218"
-                x1="93.8507"
-                y1="67.2674"
-                x2="89.9278"
-                y2="210.214"
-                gradientUnits="userSpaceOnUse"
-              >
-                <stop stopColor="#02666D" stopOpacity="0" />
-                <stop offset="1" stopColor="#02666D" />
-              </linearGradient>
-              <linearGradient
-                id="paint4_linear_25:218"
-                x1="214.505"
-                y1="10.2849"
-                x2="212.684"
-                y2="99.5816"
-                gradientUnits="userSpaceOnUse"
-              >
-                <stop stopColor="#02666D" />
-                <stop offset="1" stopColor="#02666D" stopOpacity="0" />
-              </linearGradient>
-              <radialGradient
-                id="paint5_radial_25:218"
-                cx="0"
-                cy="0"
-                r="1"
-                gradientUnits="userSpaceOnUse"
-                gradientTransform="translate(220 63) rotate(90) scale(43)"
-              >
-                <stop offset="0.145833" stopColor="white" stopOpacity="0" />
-                <stop offset="1" stopColor="white" stopOpacity="0.08" />
-              </radialGradient>
-            </defs>
-          </svg>
-        </div>
-      </section>
-    </>
+      </div>
+
+      {/* Decorative shapes */}
+      <div className="absolute right-0 top-0 z-[-1] opacity-30 lg:opacity-100">
+        <Image
+          src="/images/hero/shape-01.svg"
+          alt=""
+          width={450}
+          height={556}
+          priority
+        />
+      </div>
+      <div className="absolute bottom-0 left-0 z-[-1] opacity-30 lg:opacity-100">
+        <Image
+          src="/images/hero/shape-02.svg"
+          alt=""
+          width={364}
+          height={201}
+          priority
+        />
+      </div>
+    </section>
   );
 };
 
 export default Hero;
+
+const HeroCopy = ({
+  slide,
+  variant,
+  slides,
+  currentSlide,
+  onSelect,
+}: {
+  slide: HeroSlide;
+  variant: "enter" | "exit";
+  slides: HeroSlide[];
+  currentSlide: number;
+  onSelect: (idx: number) => void;
+}) => {
+  const wrapperClass = variant === "enter" ? "nt-hero-enter" : "nt-hero-exit";
+
+  return (
+    <div className={wrapperClass}>
+      <h1
+        className="nt-hero-item nt-hero-title mb-5 text-3xl font-bold leading-tight sm:text-4xl sm:leading-tight md:text-5xl md:leading-tight"
+        style={{ animationDelay: "40ms" }}
+      >
+        {slide.title}
+      </h1>
+      <p
+        className="nt-hero-item mb-12 text-base leading-relaxed text-white/90 sm:text-lg md:text-xl"
+        style={{ animationDelay: "140ms" }}
+      >
+        {slide.description}
+      </p>
+
+      <div
+        className="nt-hero-item flex flex-col items-center justify-center space-y-4 sm:flex-row sm:space-x-4 sm:space-y-0"
+        style={{ animationDelay: "220ms" }}
+      >
+        <Link
+          href="/contact"
+          className="rounded-xs bg-primary px-8 py-4 text-base font-semibold text-white duration-300 ease-in-out hover:bg-primary/90"
+        >
+          Contact Us
+        </Link>
+        <Link
+          href="/works"
+          className="inline-block rounded-xs bg-white px-8 py-4 text-base font-semibold text-black duration-300 ease-in-out hover:bg-white/90"
+        >
+          View Our Work
+        </Link>
+      </div>
+
+      <div
+        className="nt-hero-item mt-10 flex items-center justify-center gap-2"
+        style={{ animationDelay: "320ms" }}
+      >
+        {slides.map((_, idx) => (
+          <button
+            key={idx}
+            type="button"
+            aria-label={`Go to slide ${idx + 1}`}
+            onClick={() => onSelect(idx)}
+            className={`h-2.5 rounded-full transition-all duration-300 ${
+              idx === currentSlide
+                ? "w-8 bg-white"
+                : "w-2.5 bg-white/40 hover:bg-white/70"
+            }`}
+          />
+        ))}
+      </div>
+    </div>
+  );
+};

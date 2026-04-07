@@ -1,6 +1,7 @@
 import { Testimonial } from "@/types/testimonial";
 import SectionTitle from "../Common/SectionTitle";
 import SingleTestimonial from "./SingleTestimonial";
+import { getTestimonialsPublic } from "@/lib/publicContent";
 
 const testimonialData: Testimonial[] = [
   {
@@ -32,9 +33,13 @@ const testimonialData: Testimonial[] = [
   },
 ];
 
-const Testimonials = () => {
+const Testimonials = async () => {
+  const dbTestimonials = await getTestimonialsPublic();
+  const testimonials: Testimonial[] =
+    dbTestimonials && dbTestimonials.length > 0 ? dbTestimonials : testimonialData;
+
   return (
-    <section className="dark:bg-bg-color-dark bg-gray-light relative z-10 py-16 md:py-20 lg:py-28">
+    <section className="relative z-10 bg-gray-light py-16 dark:bg-bg-color-dark md:py-20 lg:py-28">
       <div className="container">
         <SectionTitle
           title="What Clients Say"
@@ -43,11 +48,12 @@ const Testimonials = () => {
         />
 
         <div className="grid grid-cols-1 gap-x-8 gap-y-10 md:grid-cols-2 lg:grid-cols-3">
-          {testimonialData.map((testimonial) => (
+          {testimonials.map((testimonial) => (
             <SingleTestimonial key={testimonial.id} testimonial={testimonial} />
           ))}
         </div>
       </div>
+
       <div className="absolute right-0 top-5 z-[-1]">
         <svg
           width="238"
@@ -102,6 +108,7 @@ const Testimonials = () => {
           </defs>
         </svg>
       </div>
+
       <div className="absolute bottom-5 left-0 z-[-1]">
         <svg
           width="279"
@@ -181,3 +188,4 @@ const Testimonials = () => {
 };
 
 export default Testimonials;
+

@@ -3,10 +3,7 @@
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 import ScrollToTop from "@/components/ScrollToTop";
-import { Inter } from "next/font/google";
 import "../styles/index.css";
-
-const inter = Inter({ subsets: ["latin"] });
 
 export default function RootLayout({
   children,
@@ -22,7 +19,7 @@ export default function RootLayout({
       <head />
 
       <body
-        className={`bg-white text-black antialiased dark:bg-black dark:text-white ${inter.className}`}
+        className="bg-white text-black antialiased dark:bg-black dark:text-white"
       >
         <Providers>
           <div className="isolate">

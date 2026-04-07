@@ -12,18 +12,18 @@ const Footer = () => {
               <div className="mb-12 max-w-[360px] lg:mb-16">
                 <Link href="/" className="mb-8 inline-block">
                   <Image
-                    src="/images/logo/logo-2.svg"
-                    alt="logo"
-                    className="w-full dark:hidden"
-                    width={140}
-                    height={30}
+                    src="/images/logo/native-technology-light.png"
+                    alt="Native Technology"
+                    className="h-10 w-auto dark:hidden"
+                    width={56}
+                    height={56}
                   />
                   <Image
-                    src="/images/logo/logo.svg"
-                    alt="logo"
-                    className="hidden w-full dark:block"
-                    width={140}
-                    height={30}
+                    src="/images/logo/native-technology-dark.png"
+                    alt="Native Technology"
+                    className="hidden h-10 w-auto dark:block"
+                    width={56}
+                    height={56}
                   />
                 </Link>
                 <p className="mb-9 text-base leading-relaxed text-body-color dark:text-body-color-dark">
@@ -91,18 +91,47 @@ const Footer = () => {
                   </a>
                   <a
                     href="#"
-                    aria-label="social-link"
+                    aria-label="TikTok"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="mr-6 text-body-color duration-300 hover:text-primary dark:text-body-color-dark dark:hover:text-primary"
+                  >
+                    <svg
+                      width="18"
+                      height="18"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M14 3v10.2a4.8 4.8 0 1 1-4-4.73v2.62a2.3 2.3 0 1 0 1.7 2.11V3h2.3c.25 2.08 1.7 3.78 3.7 4.36V9.8c-1.5-.28-2.8-1.06-3.7-2.18V3H14Z"
+                        fill="currentColor"
+                      />
+                    </svg>
+                  </a>
+                  <a
+                    href="#"
+                    aria-label="WhatsApp"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-body-color duration-300 hover:text-primary dark:text-body-color-dark dark:hover:text-primary"
                   >
                     <svg
-                      width="17"
-                      height="16"
-                      viewBox="0 0 17 16"
-                      className="fill-current"
+                      width="18"
+                      height="18"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
                     >
-                      <path d="M15.2196 0H1.99991C1.37516 0 0.875366 0.497491 0.875366 1.11936V14.3029C0.875366 14.8999 1.37516 15.4222 1.99991 15.4222H15.1696C15.7943 15.4222 16.2941 14.9247 16.2941 14.3029V1.09448C16.3441 0.497491 15.8443 0 15.2196 0ZM5.44852 13.1089H3.17444V5.7709H5.44852V13.1089ZM4.29899 4.75104C3.54929 4.75104 2.97452 4.15405 2.97452 3.43269C2.97452 2.71133 3.57428 2.11434 4.29899 2.11434C5.02369 2.11434 5.62345 2.71133 5.62345 3.43269C5.62345 4.15405 5.07367 4.75104 4.29899 4.75104ZM14.07 13.1089H11.796V9.55183C11.796 8.7061 11.771 7.58674 10.5964 7.58674C9.39693 7.58674 9.222 8.53198 9.222 9.47721V13.1089H6.94792V5.7709H9.17202V6.79076H9.19701C9.52188 6.19377 10.2466 5.59678 11.3711 5.59678C13.6952 5.59678 14.12 7.08925 14.12 9.12897V13.1089H14.07Z" />
+                      <path
+                        d="M12 4.2a7.8 7.8 0 0 0-6.8 11.6L4 20l4.3-1.1A7.8 7.8 0 1 0 12 4.2Zm0 1.9a5.9 5.9 0 0 1 0 11.8c-1.02 0-2.0-.27-2.86-.77l-.35-.2-2.55.65.68-2.48-.22-.37A5.9 5.9 0 0 1 12 6.1Z"
+                        fill="currentColor"
+                        opacity="0.95"
+                      />
+                      <path
+                        d="M9.6 8.8c.2-.45.4-.46.58-.46h.5c.16 0 .37.06.56.42.2.35.7 1.22.76 1.31.07.1.12.22.03.37-.1.15-.14.24-.28.37-.14.13-.3.29-.43.39-.14.1-.28.2-.12.47.16.27.7 1.16 1.5 1.88 1.03.92 1.9 1.2 2.17 1.33.27.12.43.1.6-.07.16-.16.67-.78.85-1.05.18-.26.36-.22.6-.13.24.1 1.52.72 1.78.85.26.13.43.2.49.31.06.12.06.68-.16 1.34-.22.66-1.3 1.3-1.79 1.36-.48.06-1.1.1-1.78-.12-.41-.13-.95-.31-1.63-.68-2.86-1.54-4.73-4.4-4.87-4.6-.14-.2-1.14-1.51-1.14-2.88 0-1.37.72-2.04.97-2.32Z"
+                        fill="currentColor"
+                      />
                     </svg>
                   </a>
                 </div>

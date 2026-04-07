@@ -9,7 +9,7 @@ const processData: ProcessStep[] = [
     id: 1,
     title: "Discover",
     description:
-      "We clarify goals, users, and scope—then define what success looks like.",
+      "We clarify goals, users, and scope — then define what success looks like.",
   },
   {
     id: 2,
@@ -27,7 +27,7 @@ const processData: ProcessStep[] = [
     id: 4,
     title: "Launch & Support",
     description:
-      "Deployment, monitoring, and continuous improvements to keep everything healthy.",
+      "Deploy, monitor, and continuously improve the product as you grow.",
   },
 ];
 

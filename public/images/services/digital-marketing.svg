@@ -1,0 +1,16 @@
+<svg width="640" height="420" viewBox="0 0 640 420" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="gm1" x1="86" y1="60" x2="560" y2="360" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0EA5E9"/>
+      <stop offset="0.55" stop-color="#18A0A6"/>
+      <stop offset="1" stop-color="#02666D"/>
+    </linearGradient>
+  </defs>
+  <rect x="40" y="40" width="560" height="340" rx="28" fill="url(#gm1)"/>
+  <circle cx="250" cy="210" r="78" fill="rgba(255,255,255,0.18)"/>
+  <circle cx="250" cy="210" r="48" fill="rgba(0,0,0,0.18)"/>
+  <path d="M370 285V165c0-10 8-18 18-18h90c10 0 18 8 18 18v120c0 10-8 18-18 18h-90c-10 0-18-8-18-18z" fill="rgba(0,0,0,0.18)"/>
+  <path d="M402 265l22-28 18 18 30-42" stroke="rgba(255,255,255,0.8)" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M150 300h200" stroke="rgba(255,255,255,0.35)" stroke-width="10" stroke-linecap="round"/>
+  <text x="92" y="372" fill="rgba(255,255,255,0.88)" font-family="Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial" font-size="18" font-weight="700">Digital Marketing</text>
+</svg>

@@ -1,12 +1,16 @@
 import SectionTitle from "../Common/SectionTitle";
 import teamData from "./teamData";
+import Image from "next/image";
+import { getTeamPublic } from "@/lib/publicContent";
 
 const getInitials = (name: string) => {
   const parts = name.trim().split(/\s+/).slice(0, 2);
   return parts.map((p) => p.charAt(0).toUpperCase()).join("");
 };
 
-const Team = () => {
+const Team = async () => {
+  const dbTeam = await getTeamPublic();
+  const members = dbTeam && dbTeam.length > 0 ? dbTeam : teamData;
   return (
     <section id="team" className="py-16 md:py-20 lg:py-28">
       <div className="container">
@@ -18,15 +22,27 @@ const Team = () => {
         />
 
         <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
-          {teamData.map((member) => (
+          {members.map((member) => (
             <div
               key={member.id}
               className="rounded-xs border border-stroke bg-white p-8 shadow-one dark:border-white/10 dark:bg-dark"
             >
               <div className="mb-5 flex items-center gap-4">
-                <div className="inline-flex h-12 w-12 items-center justify-center rounded-full bg-primary/10 text-lg font-bold text-primary">
-                  {getInitials(member.name)}
-                </div>
+                {member.image ? (
+                  <div className="relative h-12 w-12 overflow-hidden rounded-full ring-2 ring-primary/15">
+                    <Image
+                      src={member.image}
+                      alt={member.name}
+                      fill
+                      className="object-cover"
+                      sizes="48px"
+                    />
+                  </div>
+                ) : (
+                  <div className="inline-flex h-12 w-12 items-center justify-center rounded-full bg-primary/10 text-lg font-bold text-primary">
+                    {getInitials(member.name)}
+                  </div>
+                )}
                 <div>
                   <h3 className="text-lg font-bold text-black dark:text-white">
                     {member.name}
@@ -56,4 +72,3 @@ const Team = () => {
 };
 
 export default Team;
-

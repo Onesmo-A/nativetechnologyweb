@@ -1,9 +1,27 @@
-import { Brand } from "@/types/brand";
 import Image from "next/image";
 import SectionTitle from "../Common/SectionTitle";
 import brandsData from "./brandsData";
+import { getBrandsPublic } from "@/lib/publicContent";
 
-const Brands = () => {
+type BrandItem = {
+  id: string;
+  name: string;
+  href: string;
+  image: string;
+};
+
+const Brands = async () => {
+  const dbBrands = await getBrandsPublic();
+  const brands: BrandItem[] =
+    dbBrands && dbBrands.length > 0
+      ? dbBrands
+      : brandsData.map((b) => ({
+          id: String(b.id),
+          name: b.name,
+          href: b.href,
+          image: b.image,
+        }));
+
   return (
     <section id="trusted-by" className="pt-16">
       <div className="container">
@@ -18,12 +36,12 @@ const Brands = () => {
             <div className="nt-marquee rounded-xs bg-gray-light px-4 py-6 dark:bg-gray-dark sm:px-6 md:px-10 md:py-8 xl:px-12 2xl:px-16">
               <div className="nt-marquee-track" aria-label="Trusted by logos">
                 <div className="nt-marquee-group">
-                  {brandsData.map((brand) => (
+                  {brands.map((brand) => (
                     <SingleBrand key={brand.id} brand={brand} />
                   ))}
                 </div>
                 <div className="nt-marquee-group" aria-hidden="true">
-                  {brandsData.map((brand) => (
+                  {brands.map((brand) => (
                     <SingleBrand key={`${brand.id}-duplicate`} brand={brand} />
                   ))}
                 </div>
@@ -38,16 +56,16 @@ const Brands = () => {
 
 export default Brands;
 
-const SingleBrand = ({ brand }: { brand: Brand }) => {
+const SingleBrand = ({ brand }: { brand: BrandItem }) => {
   const { href, image, name } = brand;
 
   return (
-    <div className="flex shrink-0 items-center justify-center px-3 py-3 sm:px-4">
+    <div className="flex shrink-0 items-center justify-center px-4 py-4 sm:px-6">
       <a
         href={href}
         target="_blank"
         rel="nofollow noreferrer"
-        className="relative h-10 w-[160px] opacity-70 transition hover:opacity-100 dark:opacity-60 dark:hover:opacity-100"
+        className="relative h-14 w-[260px] opacity-95 transition hover:opacity-100 dark:opacity-90 dark:hover:opacity-100"
         aria-label={name}
       >
         <Image
@@ -55,7 +73,7 @@ const SingleBrand = ({ brand }: { brand: Brand }) => {
           alt={name}
           fill
           className="object-contain"
-          sizes="(max-width: 640px) 120px, 160px"
+          sizes="(max-width: 640px) 220px, 260px"
         />
       </a>
     </div>
