@@ -1,8 +1,18 @@
+"use client";
+
 import type { ReactNode } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import AdminTopbar from "./topbar";
 
 export default function AdminLayout({ children }: { children: ReactNode }) {
+  const pathname = usePathname();
+  const isLogin = pathname === "/admin/login";
+
+  if (isLogin) {
+    return <>{children}</>;
+  }
+
   return (
     <div className="min-h-screen bg-gray-light text-black dark:bg-black dark:text-white">
       <div className="mx-auto flex w-full max-w-[1400px]">

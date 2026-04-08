@@ -8,5 +8,9 @@ if (!password) {
 }
 
 const hash = bcrypt.hashSync(password, 10);
-console.log(hash);
+const escaped = hash.replace(/\$/g, "\\$");
 
+console.log(hash);
+console.log("");
+console.log("Use this in .env.local (escaped for Next.js):");
+console.log(`ADMIN_PASSWORD_HASH="${escaped}"`);

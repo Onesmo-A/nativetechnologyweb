@@ -9,11 +9,23 @@ const LoginSchema = z.object({
 });
 
 export async function POST(req: Request) {
-  const body = await req.json().catch(() => null);
+  const raw = await req.text().catch(() => "");
+  let body: unknown = null;
+  try {
+    body = JSON.parse(raw);
+  } catch {
+    body = null;
+  }
   const parsed = LoginSchema.safeParse(body);
 
   if (!parsed.success) {
-    return NextResponse.json({ error: "Invalid payload" }, { status: 400 });
+    return NextResponse.json(
+      {
+        error: "Invalid payload",
+        hint: "Send JSON: { email, password } with Content-Type: application/json",
+      },
+      { status: 400 },
+    );
   }
 
   const adminEmail = process.env.ADMIN_EMAIL;

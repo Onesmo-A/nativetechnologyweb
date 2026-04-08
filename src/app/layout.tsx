@@ -3,6 +3,7 @@
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 import ScrollToTop from "@/components/ScrollToTop";
+import { usePathname } from "next/navigation";
 import "../styles/index.css";
 
 export default function RootLayout({
@@ -10,6 +11,9 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  const pathname = usePathname();
+  const isAdminRoute = pathname?.startsWith("/admin") || pathname?.startsWith("/api/admin");
+
   return (
     <html suppressHydrationWarning lang="en">
       {/*
@@ -23,11 +27,11 @@ export default function RootLayout({
       >
         <Providers>
           <div className="isolate">
-            <Header />
+            {!isAdminRoute && <Header />}
             {children}
-            <Footer />
+            {!isAdminRoute && <Footer />}
           </div>
-          <ScrollToTop />
+          {!isAdminRoute && <ScrollToTop />}
         </Providers>
       </body>
     </html>
