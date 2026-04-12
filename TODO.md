@@ -1,0 +1,1 @@
+- [x] Update src/app/api/visitor/route.ts to use fs JSON instead of MongoDB ✅\n- [x] Update src/components/Footer/index.tsx: Convert to Server Component, read counter from JSON, display at very bottom ✅
