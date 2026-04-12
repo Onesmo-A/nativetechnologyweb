@@ -175,6 +175,7 @@
   background: linear-gradient(to left, rgba(240, 242, 249, 1), rgba(240, 242, 249, 0));
 }
 
+/* .dark .nt-marquee::after { */
 .dark .nt-marquee::after {
   background: linear-gradient(to left, rgba(30, 35, 46, 1), rgba(30, 35, 46, 0));
 }

@@ -1,7 +1,6 @@
 import { NextResponse } from "next/server";
 import fs from "fs/promises";
 import path from "path";
-
 const COUNTER_PATH = path.join(process.cwd(), "data/visitor-counter.json");
 
 export async function GET() {
