@@ -9,7 +9,8 @@ const Footer = () => {
   const [count, setCount] = useState(0);
 
   useEffect(() => {
-    fetch('/api/visitor')
+    // Increment visitor count
+    fetch('/api/visitor', { method: 'POST' })
       .then(res => res.json())
       .then(data => setCount(data.count))
       .catch(() => setCount(0));
