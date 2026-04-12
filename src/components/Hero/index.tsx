@@ -42,6 +42,7 @@ const Hero = ({ slides: slidesProp }: { slides?: HeroSlide[] }) => {
 
   const [currentSlide, setCurrentSlide] = useState(0);
   const [previousSlide, setPreviousSlide] = useState<number | null>(null);
+  const [visitorCount, setVisitorCount] = useState<number | null>(null);
   const currentSlideRef = useRef(currentSlide);
 
   useEffect(() => {
@@ -62,6 +63,29 @@ const Hero = ({ slides: slidesProp }: { slides?: HeroSlide[] }) => {
     const timeout = setTimeout(() => setPreviousSlide(null), COPY_EXIT_MS);
     return () => clearTimeout(timeout);
   }, [currentSlide]);
+
+  useEffect(() => {
+    async function loadVisitorCount() {
+      try {
+        const stored = window.localStorage.getItem("site-visitor-counted");
+        if (!stored) {
+          const res = await fetch("/api/visitor", { method: "POST" });
+          const data = await res.json();
+          setVisitorCount(typeof data.count === "number" ? data.count : null);
+          window.localStorage.setItem("site-visitor-counted", "true");
+          return;
+        }
+
+        const res = await fetch("/api/visitor");
+        const data = await res.json();
+        setVisitorCount(typeof data.count === "number" ? data.count : null);
+      } catch {
+        setVisitorCount(null);
+      }
+    }
+
+    loadVisitorCount();
+  }, []);
 
   return (
     <section
@@ -96,6 +120,7 @@ const Hero = ({ slides: slidesProp }: { slides?: HeroSlide[] }) => {
                     slides={slides}
                     currentSlide={currentSlide}
                     onSelect={setCurrentSlide}
+                    visitorCount={visitorCount}
                   />
                 </div>
               )}
@@ -107,6 +132,7 @@ const Hero = ({ slides: slidesProp }: { slides?: HeroSlide[] }) => {
                 slides={slides}
                 currentSlide={currentSlide}
                 onSelect={setCurrentSlide}
+                visitorCount={visitorCount}
               />
             </div>
           </div>
@@ -144,12 +170,14 @@ const HeroCopy = ({
   slides,
   currentSlide,
   onSelect,
+  visitorCount,
 }: {
   slide: HeroSlide;
   variant: "enter" | "exit";
   slides: HeroSlide[];
   currentSlide: number;
   onSelect: (idx: number) => void;
+  visitorCount: number | null;
 }) => {
   const wrapperClass = variant === "enter" ? "nt-hero-enter" : "nt-hero-exit";
 
@@ -190,6 +218,13 @@ const HeroCopy = ({
         className="nt-hero-item mt-10 flex items-center justify-center gap-2"
         style={{ animationDelay: "320ms" }}
       >
+        <div className="inline-flex items-center gap-3 rounded-full border border-white/20 bg-black/40 px-5 py-3 text-sm font-medium text-white/90 backdrop-blur">
+          <span className="text-lg font-semibold text-white">
+            {visitorCount !== null ? visitorCount.toLocaleString() : "Loading..."}
+          </span>
+          <span>website visitors</span>
+        </div>
+      </div>
         {slides.map((_, idx) => (
           <button
             key={idx}
@@ -204,6 +239,5 @@ const HeroCopy = ({
           />
         ))}
       </div>
-    </div>
   );
 };

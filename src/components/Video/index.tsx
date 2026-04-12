@@ -54,7 +54,7 @@ export default function Video() {
                   onClick={() => setOpen(true)}
                   className="text-dark inline-flex items-center gap-2 rounded-xs bg-black/5 px-7 py-3 text-base font-semibold duration-300 hover:bg-black/10 dark:bg-white/10 dark:text-white dark:hover:bg-white/15"
                 >
-                  <span className="nt-ripple text-primary inline-flex h-7 w-7 items-center justify-center rounded-full bg-white dark:bg-white/10">
+                  <span className="text-primary inline-flex h-7 w-7 items-center justify-center rounded-full bg-white dark:bg-white/10">
                     <svg
                       width="14"
                       height="14"
