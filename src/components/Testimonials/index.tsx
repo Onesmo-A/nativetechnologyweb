@@ -6,8 +6,8 @@ import { getTestimonialsPublic } from "@/lib/publicContent";
 const testimonialData: Testimonial[] = [
   {
     id: 1,
-    name: "Client Project Lead",
-    designation: "Operations Team",
+    name: "Mr Elijah",
+    designation: "CEO, Mutual Generation International",
     content:
       "Native Technology delivered with clarity and speed. Communication was excellent, and the final product was polished and reliable.",
     image: "/images/testimonials/auth-01.png",
@@ -15,8 +15,8 @@ const testimonialData: Testimonial[] = [
   },
   {
     id: 2,
-    name: "Product Owner",
-    designation: "Startup Founder",
+    name: "Ivana",
+    designation: "Vikoba treasurer",
     content:
       "Great attention to detail in both design and development. The team handled feedback quickly and kept everything on track.",
     image: "/images/testimonials/auth-02.png",
@@ -24,8 +24,8 @@ const testimonialData: Testimonial[] = [
   },
   {
     id: 3,
-    name: "IT Coordinator",
-    designation: "Business Team",
+    name: "Joha",
+    designation: "Founder CBH Group",
     content:
       "We needed long-term maintenance and support. Their structured process and fast turnaround made a big difference.",
     image: "/images/testimonials/auth-03.png",
