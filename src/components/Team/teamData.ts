@@ -9,26 +9,61 @@ export type TeamMember = {
 const teamData: TeamMember[] = [
   {
     id: 1,
-    name: "Skilled Team Member",
+    name: "Alexander OT",
     role: "Full-Stack Developer",
-    skills: ["Web Apps", "APIs", "Performance"],
+    skills: [
+      "Scalable Web Applications",
+      "RESTful APIs",
+      "System Architecture",
+    ],
     image: "/images/team/member-01.png",
   },
   {
     id: 2,
-    name: "Skilled Team Member",
-    role: "Mobile Developer",
-    skills: ["Android/iOS", "Offline UX", "Sync"],
+    name: "Msofe AJ",
+    role: "Mobile App Developer",
+    skills: [
+      "Android & iOS Apps",
+      "Offline-First Experience",
+      "Real-Time Data Sync",
+    ],
     image: "/images/team/member-02.png",
   },
   {
     id: 3,
-    name: "Skilled Team Member",
+    name: "Janeth Mrema",
     role: "UI/UX Designer",
-    skills: ["Design Systems", "Prototyping", "Accessibility"],
+    skills: [
+      "User-Centered Design",
+      "Prototyping & Wireframing",
+      "Design Systems",
+    ],
     image: "/images/team/member-03.png",
+  },
+  {
+    id: 4,
+    name: "Japheth KJ",
+    role: "Network Engineer",
+    skills: [
+      "Network Infrastructure Design",
+      "Routing & Switching",
+      "Cloud Networking",
+      "System Reliability",
+    ],
+    image: "/images/team/member-04.png",
+  },
+  {
+    id: 5,
+    name: "Brian KM",
+    role: "Security Engineer",
+    skills: [
+      "Application Security",
+      "Penetration Testing",
+      "Vulnerability Management",
+      "Data Protection & Encryption",
+    ],
+    image: "/images/team/member-05.png",
   },
 ];
 
 export default teamData;
-
