@@ -24,20 +24,22 @@ const Footer = () => {
             <div className="w-full px-4 md:w-1/2 lg:w-4/12 xl:w-5/12">
               <div className="mb-12 max-w-[360px] lg:mb-16">
                 <Link href="/" className="mb-8 inline-block">
-                  <Image
-                    src="/images/logo/native-technology-light.png"
-                    alt="Native Technology"
-                    className="h-10 w-auto dark:hidden"
-                    width={56}
-                    height={56}
-                  />
-                  <Image
-                    src="/images/logo/native-technology-dark.png"
-                    alt="Native Technology"
-                    className="hidden h-10 w-auto dark:block"
-                    width={56}
-                    height={56}
-                  />
+                  <span className="inline-flex items-center justify-center rounded-full bg-white p-2 shadow-sm border border-white/80 dark:bg-white/95 dark:border-white/20">
+                    <Image
+                      src="/images/logo/native-technology-light.png"
+                      alt="Native Technology"
+                      className="h-10 w-auto dark:hidden"
+                      width={56}
+                      height={56}
+                    />
+                    <Image
+                      src="/images/logo/native-technology-dark.png"
+                      alt="Native Technology"
+                      className="hidden h-10 w-auto dark:block"
+                      width={56}
+                      height={56}
+                    />
+                  </span>
                 </Link>
                 <p className="mb-9 text-base leading-relaxed text-body-color dark:text-body-color-dark">
                   Native Technology builds modern web apps, mobile apps, and
@@ -227,7 +229,9 @@ const Footer = () => {
                 <ul>
                   <li>
                     <Link
-                      href="/contact"
+                      href="https://wa.me/255743331626"
+                      target="_blank"
+                      rel="noopener noreferrer"
                       className="mb-4 inline-block text-base text-body-color duration-300 hover:text-primary dark:text-body-color-dark dark:hover:text-primary"
                     >
                       Contact Us

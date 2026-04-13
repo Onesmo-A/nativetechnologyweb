@@ -173,7 +173,9 @@ const HeroCopy = ({
         style={{ animationDelay: "220ms" }}
       >
         <Link
-          href="/contact"
+          href="https://wa.me/255743331626"
+          target="_blank"
+          rel="noopener noreferrer"
           className="rounded-xs bg-primary px-8 py-4 text-base font-semibold text-white duration-300 ease-in-out hover:bg-primary/90"
         >
           Contact Us

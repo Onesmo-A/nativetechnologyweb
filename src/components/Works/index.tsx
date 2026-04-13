@@ -44,7 +44,7 @@ const Works = async () => {
               <div className="absolute inset-0 bg-gradient-to-t from-white/70 via-white/45 to-white/10 dark:from-black/70 dark:via-black/45 dark:to-black/10" />
 
               <div className="relative">
-                <div className="mb-5 inline-flex rounded-full bg-primary/12 px-4 py-1 text-sm font-semibold text-primary backdrop-blur-sm">
+                <div className="mb-5 inline-flex rounded-full bg-white px-4 py-1 text-sm font-semibold text-primary">
                   {item.category}
                 </div>
                 <h3 className="mb-3 text-xl font-bold text-black dark:text-white">
