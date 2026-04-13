@@ -47,8 +47,8 @@ const Footer = () => {
                 </p>
                 <div className="flex items-center">
                   <a
-                    href="#"
-                    aria-label="social-link"
+                    href="https://www.facebook.com/share/1BoCtQi7PC/"
+                    aria-label="Facebook"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="mr-6 text-body-color duration-300 hover:text-primary dark:text-body-color-dark dark:hover:text-primary"
@@ -89,8 +89,8 @@ const Footer = () => {
                     </svg>
                   </a>
                   <a
-                    href="#"
-                    aria-label="social-link"
+                    href="https://youtu.be/i5g5kNIvyuE?si=hBuRa45C_LwQtA93"
+                    aria-label="YouTube"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="mr-6 text-body-color duration-300 hover:text-primary dark:text-body-color-dark dark:hover:text-primary"
@@ -125,8 +125,8 @@ const Footer = () => {
                     </svg>
                   </a>
                   <a
-                    href="#"
-                    aria-label="WhatsApp"
+                    href="https://www.instagram.com/nativetechnology_tz?igsh=c3l1dnN5cmFlcjEz"
+                    aria-label="Instagram"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-body-color duration-300 hover:text-primary dark:text-body-color-dark dark:hover:text-primary"
@@ -139,12 +139,7 @@ const Footer = () => {
                       xmlns="http://www.w3.org/2000/svg"
                     >
                       <path
-                        d="M12 4.2a7.8 7.8 0 0 0-6.8 11.6L4 20l4.3-1.1A7.8 7.8 0 1 0 12 4.2Zm0 1.9a5.9 5.9 0 0 1 0 11.8c-1.02 0-2.0-.27-2.86-.77l-.35-.2-2.55.65.68-2.48-.22-.37A5.9 5.9 0 0 1 12 6.1Z"
-                        fill="currentColor"
-                        opacity="0.95"
-                      />
-                      <path
-                        d="M9.6 8.8c.2-.45.4-.46.58-.46h.5c.16 0 .37.06.56.42.2.35.7 1.22.76 1.31.07.1.12.22.03.37-.1.15-.14.24-.28.37-.14.13-.3.29-.43.39-.14.1-.28.2-.12.47.16.27.7 1.16 1.5 1.88 1.03.92 1.9 1.2 2.17 1.33.27.12.43.1.6-.07.16-.16.67-.78.85-1.05.18-.26.36-.22.6-.13.24.1 1.52.72 1.78.85.26.13.43.2.49.31.06.12.06.68-.16 1.34-.22.66-1.3 1.3-1.79 1.36-.48.06-1.1.1-1.78-.12-.41-.13-.95-.31-1.63-.68-2.86-1.54-4.73-4.4-4.87-4.6-.14-.2-1.14-1.51-1.14-2.88 0-1.37.72-2.04.97-2.32Z"
+                        d="M7.75 2h8.5A5.75 5.75 0 0 1 22 7.75v8.5A5.75 5.75 0 0 1 16.25 22h-8.5A5.75 5.75 0 0 1 2 16.25v-8.5A5.75 5.75 0 0 1 7.75 2Zm0 1.5A4.25 4.25 0 0 0 3.5 7.75v8.5A4.25 4.25 0 0 0 7.75 20.5h8.5A4.25 4.25 0 0 0 20.5 16.25v-8.5A4.25 4.25 0 0 0 16.25 3.5h-8.5Zm8.75 2.5a1 1 0 1 1 0 2 1 1 0 0 1 0-2ZM12 7.25a4.75 4.75 0 1 1 0 9.5 4.75 4.75 0 0 1 0-9.5Zm0 1.5a3.25 3.25 0 1 0 0 6.5 3.25 3.25 0 0 0 0-6.5Z"
                         fill="currentColor"
                       />
                     </svg>
