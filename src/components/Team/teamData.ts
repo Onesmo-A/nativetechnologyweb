@@ -20,7 +20,7 @@ const teamData: TeamMember[] = [
   },
   {
     id: 2,
-    name: "Msofe AJ",
+    name: "Janeth Mrema",
     role: "Mobile App Developer",
     skills: [
       "Android & iOS Apps",
@@ -31,7 +31,7 @@ const teamData: TeamMember[] = [
   },
   {
     id: 3,
-    name: "Janeth Mrema",
+    name: "Msofe AJ",
     role: "UI/UX Designer",
     skills: [
       "User-Centered Design",
