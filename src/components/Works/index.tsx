@@ -23,7 +23,7 @@ const Works = async () => {
       <div className="container">
         <SectionTitle
           title="Our Works"
-          paragraph="A snapshot of the kind of products we design, build, and maintain. Replace these examples with your real projects anytime."
+          paragraph="Real projects we've delivered for retail, awards platforms, corporate brands and modern business systems."
           center
           mb="50px"
         />
@@ -38,7 +38,7 @@ const Works = async () => {
                 src={item.image || "/images/works/work-01.jpg"}
                 alt=""
                 fill
-                className="object-cover opacity-45 transition duration-700 group-hover:scale-[1.04] dark:opacity-35"
+                className="object-cover opacity-45 dark:opacity-35"
                 sizes="(max-width: 768px) 100vw, 33vw"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-white/70 via-white/45 to-white/10 dark:from-black/70 dark:via-black/45 dark:to-black/10" />
