@@ -82,7 +82,7 @@ export default function Video() {
                     <button
                       aria-label="video play button"
                       onClick={() => setOpen(true)}
-                      className="nt-ripple text-primary flex h-[74px] w-[74px] cursor-pointer items-center justify-center rounded-full bg-white/80 transition hover:bg-white dark:bg-white/10 dark:hover:bg-white/15"
+                      className="nt-ripple text-white flex h-[74px] w-[74px] cursor-pointer items-center justify-center rounded-full bg-primary/70 transition hover:bg-primary dark:bg-primary/60 dark:hover:bg-primary/80"
                     >
                       <svg
                         width="16"

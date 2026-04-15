@@ -1,3 +1,5 @@
+"use server";
+
 import { connectMongo } from "@/lib/mongodb";
 import { HeroSlideModel } from "@/models/HeroSlide";
 import { BrandModel } from "@/models/Brand";

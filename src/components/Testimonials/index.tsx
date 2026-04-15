@@ -1,6 +1,9 @@
+"use client";
+
 import { Testimonial } from "@/types/testimonial";
 import SectionTitle from "../Common/SectionTitle";
 import SingleTestimonial from "./SingleTestimonial";
+import { useState, useEffect } from "react";
 import { getTestimonialsPublic } from "@/lib/publicContent";
 
 const testimonialData: Testimonial[] = [
@@ -33,10 +36,29 @@ const testimonialData: Testimonial[] = [
   },
 ];
 
-const Testimonials = async () => {
-  const dbTestimonials = await getTestimonialsPublic();
-  const testimonials: Testimonial[] =
-    dbTestimonials && dbTestimonials.length > 0 ? dbTestimonials : testimonialData;
+const Testimonials = () => {
+  const [testimonials, setTestimonials] = useState<Testimonial[]>([]);
+
+  useEffect(() => {
+    setTestimonials(testimonialData);
+  }, []);
+
+  if (testimonials.length === 0) {
+    return (
+      <section className="relative z-10 bg-gray-light py-16 dark:bg-bg-color-dark md:py-20 lg:py-28">
+        <div className="container">
+          <SectionTitle
+            title="What Clients Say"
+            paragraph="A few words from teams we've supported through design, development, and ongoing maintenance."
+            center
+          />
+          <div>Loading...</div>
+        </div>
+      </section>
+    );
+  }
+
+  const duplicatedTestimonials = [...testimonials, ...testimonials];
 
   return (
     <section className="relative z-10 bg-gray-light py-16 dark:bg-bg-color-dark md:py-20 lg:py-28">
@@ -47,10 +69,14 @@ const Testimonials = async () => {
           center
         />
 
-        <div className="grid grid-cols-1 gap-x-8 gap-y-10 md:grid-cols-2 lg:grid-cols-3">
-          {testimonials.map((testimonial) => (
-            <SingleTestimonial key={testimonial.id} testimonial={testimonial} />
-          ))}
+        <div className="testimonials-marquee h-[450px] md:h-[400px] lg:h-[350px]">
+          <div className="testimonials-marquee-track flex h-full flex-nowrap items-stretch gap-8">
+            {duplicatedTestimonials.map((testimonial, index) => (
+              <div key={`${testimonial.id}-${index}`} className="w-full min-w-[280px] max-w-[350px] flex-shrink-0">
+                <SingleTestimonial testimonial={testimonial} />
+              </div>
+            ))}
+          </div>
         </div>
       </div>
 

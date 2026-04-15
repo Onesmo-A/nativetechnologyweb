@@ -201,14 +201,98 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .nt-marquee-track {
+  .nt-marquee-track,
+  .works-marquee-track,
+  .testimonials-marquee-track {
     animation: none;
     transform: none;
   }
   .nt-marquee::before,
-  .nt-marquee::after {
+  .nt-marquee::after,
+  .works-marquee::before,
+  .works-marquee::after,
+  .testimonials-marquee::before,
+  .testimonials-marquee::after {
     display: none;
   }
+}
+
+@keyframes marquee-works {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+@keyframes marquee-testimonials {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+.works-marquee,
+.testimonials-marquee {
+  position: relative;
+  overflow: hidden;
+}
+
+.works-marquee::before,
+.works-marquee::after,
+.testimonials-marquee::before,
+.testimonials-marquee::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  height: 100%;
+  width: 72px;
+  z-index: 10;
+  pointer-events: none;
+}
+
+.works-marquee::before,
+.testimonials-marquee::before {
+  left: 0;
+  background: linear-gradient(to right, rgba(240, 242, 249, 1), rgba(240, 242, 249, 0));
+}
+
+.dark .works-marquee::before,
+.dark .testimonials-marquee::before {
+  background: linear-gradient(to right, rgba(30, 35, 46, 1), rgba(30, 35, 46, 0));
+}
+
+.works-marquee::after,
+.testimonials-marquee::after {
+  right: 0;
+  background: linear-gradient(to left, rgba(240, 242, 249, 1), rgba(240, 242, 249, 0));
+}
+
+.dark .works-marquee::after,
+.dark .testimonials-marquee::after {
+  background: linear-gradient(to left, rgba(30, 35, 46, 1), rgba(30, 35, 46, 0));
+}
+
+.works-marquee-track,
+.testimonials-marquee-track {
+  width: max-content;
+  display: flex;
+  align-items: center;
+  flex-wrap: nowrap;
+  animation: marquee-works 40s linear infinite;
+  will-change: transform;
+}
+
+.testimonials-marquee-track {
+  animation: marquee-testimonials 45s linear infinite;
+}
+
+.works-marquee:hover .works-marquee-track,
+.testimonials-marquee:hover .testimonials-marquee-track {
+  animation-play-state: paused;
 }
 
 @keyframes nt-ripple {
@@ -236,7 +320,7 @@
   position: absolute;
   inset: -12px;
   border-radius: 9999px;
-  border: 2px solid rgba(2, 102, 109, 0.75);
+  border: 2px solid color-mix(in srgb, var(--color-primary) 75%, transparent);
   pointer-events: none;
   z-index: -1;
   animation: nt-ripple 1.8s cubic-bezier(0.22, 1, 0.36, 1) infinite;
@@ -244,7 +328,7 @@
 
 .dark .nt-ripple::before,
 .dark .nt-ripple::after {
-  border-color: rgba(2, 102, 109, 0.7);
+  border-color: color-mix(in srgb, var(--color-primary) 70%, transparent);
 }
 
 .nt-ripple::after {
