@@ -60,20 +60,20 @@ const SingleBrand = ({ brand }: { brand: BrandItem }) => {
   const { href, image, name } = brand;
 
   return (
-    <div className="flex shrink-0 items-center justify-center px-4 py-4 sm:px-6">
+    <div className="flex shrink-0 items-center justify-center px-3 py-3 sm:px-5 sm:py-4">
       <a
         href={href}
         target="_blank"
         rel="nofollow noreferrer"
-        className="relative h-14 w-[260px] opacity-95 transition hover:opacity-100 dark:opacity-90 dark:hover:opacity-100"
+        className="relative flex h-16 w-[240px] items-center justify-center rounded-md border border-black/5 bg-white/75 px-4 py-3 opacity-95 shadow-one backdrop-blur-xs transition hover:opacity-100 dark:border-white/10 dark:bg-white/5 dark:opacity-95 dark:hover:bg-white/8 sm:h-[72px] sm:w-[280px] md:w-[320px]"
         aria-label={name}
       >
         <Image
           src={image}
           alt={name}
           fill
-          className="object-contain"
-          sizes="(max-width: 640px) 220px, 260px"
+          className="object-contain p-3"
+          sizes="(max-width: 640px) 240px, (max-width: 768px) 280px, 320px"
         />
       </a>
     </div>
