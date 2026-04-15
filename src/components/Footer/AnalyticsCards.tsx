@@ -23,7 +23,7 @@ export default function AnalyticsCards() {
     return [
       { label: "Online", value: data?.online ?? null, hint: "Active users right now" },
       { label: "Today", value: data?.today ?? null, hint: "Active users today" },
-      { label: "Last 7 Days", value: data?.week ?? null, hint: "Active users (7 days)" },
+      { label: "This Week", value: data?.week ?? null, hint: "Active users (last 7 days)" },
       { label: "This Month", value: data?.month ?? null, hint: "Active users (month-to-date)" },
     ];
   }, [data]);

@@ -22,8 +22,14 @@ function base64UrlEncode(input: string | Buffer) {
 }
 
 function getPrivateKey() {
-  const raw = process.env.GA_PRIVATE_KEY?.trim();
+  let raw = process.env.GA_PRIVATE_KEY?.trim() || "";
   if (!raw) return "";
+  if (
+    (raw.startsWith('"') && raw.endsWith('"')) ||
+    (raw.startsWith("'") && raw.endsWith("'"))
+  ) {
+    raw = raw.slice(1, -1);
+  }
   return raw.replace(/\\n/g, "\n");
 }
 
