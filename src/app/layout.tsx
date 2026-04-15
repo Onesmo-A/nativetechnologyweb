@@ -1,6 +1,3 @@
-import Footer from "@/components/Footer";
-import Header from "@/components/Header";
-import ScrollToTop from "@/components/ScrollToTop";
 import GoogleAnalytics from "@/components/Analytics/GoogleAnalytics";
 import { Metadata } from "next";
 import { Inter } from "next/font/google";
@@ -79,12 +76,7 @@ export default function RootLayout({
             // eslint-disable-next-line react/no-danger
             dangerouslySetInnerHTML={{ __html: JSON.stringify(orgJsonLd) }}
           />
-          <div className="isolate">
-            <Header />
-            {children}
-            <Footer />
-          </div>
-          <ScrollToTop />
+          {children}
         </Providers>
       </body>
     </html>

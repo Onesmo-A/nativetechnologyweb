@@ -3,19 +3,9 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useState, useEffect } from "react";
+import AnalyticsCards from "./AnalyticsCards";
 
 const Footer = () => {
-  const [count, setCount] = useState(0);
-
-  useEffect(() => {
-    // Increment visitor count
-    fetch('/api/visitor', { method: 'POST' })
-      .then(res => res.json())
-      .then(data => setCount(data.count))
-      .catch(() => setCount(0));
-  }, []);
-
   return (
     <>
       <footer className="relative z-10 bg-white pt-16 dark:bg-gray-dark md:pt-20 lg:pt-24">
@@ -255,15 +245,10 @@ const Footer = () => {
 
           <div className="h-px w-full bg-linear-to-r from-transparent via-[#D2D8E183] to-transparent dark:via-[#959CB183]"></div>
           
-          {/* Visitor Counter */}
-          <div className="py-6 bg-gray-50/50 dark:bg-gray-900/50 border-t border-gray-200 dark:border-gray-800 rounded-lg">
-            <div className="container">
-              <p className="text-center text-lg font-semibold text-body-color dark:text-body-color-dark">
-                Total Website Visitors: <span className="text-2xl font-bold text-primary">{count.toLocaleString()}</span>
-              </p>
-            </div>
-          </div>
+
           
+          <AnalyticsCards />
+
           <div className="py-8">
             <p className="text-center text-base text-body-color dark:text-white">
               © {new Date().getFullYear()} Native Technology. All rights reserved.

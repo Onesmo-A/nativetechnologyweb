@@ -65,7 +65,7 @@ const SingleBrand = ({ brand }: { brand: BrandItem }) => {
         href={href}
         target="_blank"
         rel="nofollow noreferrer"
-        className="relative flex h-16 w-[240px] items-center justify-center rounded-md border border-black/5 bg-white/75 px-4 py-3 opacity-95 shadow-one backdrop-blur-xs transition hover:opacity-100 dark:border-white/10 dark:bg-white/5 dark:opacity-95 dark:hover:bg-white/8 sm:h-[72px] sm:w-[280px] md:w-[320px]"
+        className="relative flex h-[72px] w-[280px] items-center justify-center rounded-md border border-black/5 bg-white/75 px-4 py-3 opacity-95 shadow-one backdrop-blur-xs transition hover:opacity-100 dark:border-white/10 dark:bg-white/5 dark:opacity-95 dark:hover:bg-white/8 md:h-[76px] md:w-[340px]"
         aria-label={name}
       >
         <Image
@@ -73,7 +73,7 @@ const SingleBrand = ({ brand }: { brand: BrandItem }) => {
           alt={name}
           fill
           className="object-contain p-3"
-          sizes="(max-width: 640px) 240px, (max-width: 768px) 280px, 320px"
+          sizes="(max-width: 640px) 280px, (max-width: 768px) 280px, 340px"
         />
       </a>
     </div>
