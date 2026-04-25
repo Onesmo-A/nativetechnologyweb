@@ -1,4 +1,4 @@
-export type TeamMember = {
+export type TeamMember = { 
   id: number;
   name: string;
   role: string;
@@ -18,16 +18,16 @@ const teamData: TeamMember[] = [
     ],
     image: "/images/team/member-01.png",
   },
-  {
+    {
     id: 2,
-    name: "Janeth Mrema",
-    role: "Mobile App Developer",
+    name: "Machumi Peter",
+    role: "Senior Full-Stack & Mobile App Developer",
     skills: [
-      "Android & iOS Apps",
-      "Offline-First Experience",
-      "Real-Time Data Sync",
+      "Full-Stack Development",
+      "Mobile App Development (Android & iOS)",
+      "Advanced System Architecture",
     ],
-    image: "/images/team/member-02.png",
+    image: "/images/team/member-06.png",
   },
   {
     id: 3,
@@ -63,6 +63,17 @@ const teamData: TeamMember[] = [
       "Data Protection & Encryption",
     ],
     image: "/images/team/member-05.png",
+  },
+   {
+    id: 6,
+    name: "Janeth Mrema",
+    role: "Mobile App Developer",
+    skills: [
+      "Android & iOS Apps",
+      "Offline-First Experience",
+      "Real-Time Data Sync",
+    ],
+    image: "/images/team/member-02.png",
   },
 ];
 
