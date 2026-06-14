@@ -1,7 +1,6 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
 import SectionTitle from "../Common/SectionTitle";
 import worksData from "./worksData";
 import { useState, useEffect } from "react";
@@ -14,6 +13,7 @@ type WorkItem = {
   description: string;
   tags: string[];
   image?: string;
+  url?: string;
 };
 
 const Works = () => {
@@ -31,7 +31,8 @@ const Works = () => {
             category: x.category,
             description: x.description,
             tags: x.tags,
-            image: "/images/works/work-01.jpg",
+            image: x.image,
+            url: x.url,
           }));
           setWorks(fallbackWorks);
         }
@@ -43,7 +44,8 @@ const Works = () => {
           category: x.category,
           description: x.description,
           tags: x.tags,
-          image: "/images/works/work-01.jpg",
+          image: x.image,
+          url: x.url,
         }));
         setWorks(fallbackWorks);
       });
@@ -53,73 +55,81 @@ const Works = () => {
     return <div>Loading...</div>;
   }
 
-  const duplicatedWorks = [...works, ...works];
-
   return (
     <section id="works" className="py-16 md:py-20 lg:py-28">
       <div className="container">
         <SectionTitle
-          title="Our Works"
-          paragraph="Real projects we've delivered for retail, awards platforms, corporate brands and modern business systems."
+          title="Our Projects"
+          paragraph="A curated showcase of live websites and digital products designed for growth, trust, and engagement."
           center
           mb="50px"
         />
 
-        <div className="works-marquee h-[500px] md:h-[450px] lg:h-[400px]">
-          <div className="works-marquee-track flex h-full flex-nowrap items-stretch gap-8">
-            {duplicatedWorks.map((item, idx) => {
-              const pass = Math.floor(idx / works.length);
-
-              return (
-                <div
-                  key={`${item.id}-${pass}`}
-                  className="group relative w-full min-w-[300px] max-w-[400px] flex-shrink-0 overflow-hidden rounded-xs border border-stroke bg-white/75 p-8 shadow-one backdrop-blur-sm transition hover:bg-white/80 hover:shadow-two dark:border-white/10 dark:bg-dark/60 dark:hover:bg-dark/70"
-                >
-                  <Image
-                    src={item.image || "/images/works/work-01.jpg"}
-                    alt={item.title}
-                    fill
-                    className="object-cover opacity-45 dark:opacity-35"
-                    sizes="(max-width: 768px) 100vw, 33vw"
-                  />
-
-                  <div className="absolute inset-0 bg-gradient-to-t from-white/70 via-white/45 to-white/10 dark:from-black/70 dark:via-black/45 dark:to-black/10" />
-
-                  <div className="relative">
-                    <div className="mb-5 inline-flex rounded-full bg-white px-4 py-1 text-sm font-semibold text-primary">
-                      {item.category}
-                    </div>
-
-                    <h3 className="mb-3 text-xl font-bold text-black dark:text-white">
-                      {item.title}
-                    </h3>
-
-                    <p className="mb-6 text-base leading-relaxed text-body-color dark:text-body-color-dark">
-                      {item.description}
-                    </p>
-
-                    <div className="mb-7 flex flex-wrap gap-2">
-                      {item.tags.map((tag) => (
-                        <span
-                          key={tag}
-                          className="rounded-md bg-black/5 px-3 py-1 text-xs font-medium text-black/70 dark:bg-white/10 dark:text-white/70"
-                        >
-                          {tag}
-                        </span>
-                      ))}
-                    </div>
-
-                    <Link
-                      href="/contact"
-                      className="inline-flex items-center gap-2 text-base font-semibold text-primary transition group-hover:gap-3"
-                    >
-                      Discuss a similar project <span aria-hidden="true">→</span>
-                    </Link>
-                  </div>
+        <div className="grid gap-8 sm:grid-cols-2 xl:grid-cols-3">
+          {works.map((item) => (
+            <article
+              key={item.id}
+              className="group overflow-hidden rounded-[26px] border border-stroke bg-white shadow-one transition hover:-translate-y-1 hover:shadow-two dark:border-white/10 dark:bg-dark"
+            >
+              <div className="relative overflow-hidden bg-slate-100">
+                <div className="aspect-[4/3] sm:aspect-[16/11]">
+                  {item.image ? (
+                    <Image
+                      src={item.image}
+                      alt={item.title}
+                      fill
+                      className="object-cover transition duration-500 group-hover:scale-105"
+                      sizes="(max-width: 768px) 100vw, 33vw"
+                    />
+                  ) : null}
                 </div>
-              );
-            })}
-          </div>
+                <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent" />
+              </div>
+
+              <div className="space-y-4 p-6 sm:p-7">
+                <span className="inline-flex rounded-full bg-primary/10 px-4 py-1 text-xs font-semibold text-primary">
+                  {item.category}
+                </span>
+
+                <div className="space-y-3">
+                  <a
+                    href={item.url ?? "/"}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="block text-xl font-semibold text-black transition hover:text-primary dark:text-white"
+                  >
+                    {item.title}
+                  </a>
+
+                  <p className="text-sm leading-relaxed text-body-color dark:text-body-color-dark">
+                    {item.description}
+                  </p>
+                </div>
+
+                <div className="flex flex-wrap gap-2">
+                  {item.tags.map((tag) => (
+                    <span
+                      key={tag}
+                      className="rounded-full bg-black/5 px-3 py-1 text-[11px] font-medium uppercase tracking-[0.16em] text-black/70 dark:bg-white/10 dark:text-white/70"
+                    >
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+
+                <div className="pt-2">
+                  <a
+                    href={item.url ?? "/"}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="inline-flex items-center justify-center rounded-full border border-primary/15 bg-primary/5 px-5 py-3 text-sm font-semibold text-primary transition hover:bg-primary/10"
+                  >
+                    Visit website
+                  </a>
+                </div>
+              </div>
+            </article>
+          ))}
         </div>
       </div>
     </section>

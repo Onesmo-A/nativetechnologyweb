@@ -31,14 +31,14 @@ const teamData: TeamMember[] = [
   },
   {
     id: 3,
-    name: "Msofe AJ",
-    role: "UI/UX Designer",
+    name: "Beda I.M",
+    role: "Graphics/UI/UX Designer",
     skills: [
       "User-Centered Design",
       "Prototyping & Wireframing",
       "Design Systems",
     ],
-    image: "/images/team/member-03.png",
+    image: "/images/team/Beda.jpeg",
   },
   {
     id: 4,

@@ -5,6 +5,7 @@ export type WorkItem = {
   description: string;
   tags: string[];
   image: string;
+  url: string;
 };
 
 const worksData: WorkItem[] = [
@@ -16,6 +17,7 @@ const worksData: WorkItem[] = [
       "A scalable POS system for supermarkets, shops, pharmacies and growing businesses built with React and Laravel.",
     tags: ["React", "Laravel", "Point of Sale", "Inventory"],
     image: "/images/works/work-01.jpg",
+    url: "https://stokapos.co.tz",
   },
   {
     id: 2,
@@ -24,7 +26,8 @@ const worksData: WorkItem[] = [
     description:
       "A web app for award management, nominations, judging and full ceremony workflows for Business Awards Tanzania.",
     tags: ["Award Management", "Web App", "Workflows"],
-    image: "/images/works/work-02.jpg",
+    image: "/images/works/business_awards.png",
+    url: "https://www.businessawards.co.tz",
   },
   {
     id: 3,
@@ -33,7 +36,8 @@ const worksData: WorkItem[] = [
     description:
       "An awards platform that supports event listings, nominations, voting and the complete awards process.",
     tags: ["Awards", "Voting", "Event Management"],
-    image: "/images/works/work-03.jpg",
+    image: "/images/works/taphe_awards.png",
+    url: "https://www.tapheawards.co.tz",
   },
   {
     id: 4,
@@ -42,7 +46,8 @@ const worksData: WorkItem[] = [
     description:
       "A corporate website and client engagement platform for Mutual Generation showcasing services and business value.",
     tags: ["Corporate", "Branding", "Client Engagement"],
-    image: "/images/works/work-01.jpg",
+    image: "/images/works/mutualgeneration.png",
+    url: "https://www.mutualgenerationinternational.or.tz/",
   },
   {
     id: 5,
@@ -52,6 +57,7 @@ const worksData: WorkItem[] = [
       "A professional business website for Delphine Company with service showcases, portfolio and contact workflows.",
     tags: ["Business Site", "Responsive", "SEO"],
     image: "/images/works/work-02.jpg",
+    url: "https://delphinecompany.co.tz",
   },
 ];
 
